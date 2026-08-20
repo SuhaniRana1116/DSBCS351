@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+struct Node {
+int val;
+struct Node* next;
+};
+Node* insertNodeAtPosition(SinglyLinkedListNode* head, int val, int position) {
+if (position < 1 || position > list.length) {
+return NULL;
+}
+if (position == 1) {
+Node* newNode = new Node(val);
+newNode->next = head;
+return newNode;
+}
+Node* curr = head;
+for (int i = 1; i < position - 1; i++) {
+curr = curr->next;
+}
+newNode->next = curr->next;
+curr->next = newNode;
+return head;
+}

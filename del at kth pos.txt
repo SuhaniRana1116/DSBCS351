@@ -1,0 +1,22 @@
+include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <list.h>
+void deleteNode(struct Node* head, int position) {
+struct Node* prev = NULL;
+struct Node* curr = head;
+while (curr != NULL) {
+prev = curr;
+curr = curr->next;
+if (curr->data == position) {
+prev->next = curr->next;
+deleteNode(prev->next, position);
+prev->next = NULL;
+}
+prev = curr;
+curr = curr->next;
+}
+head = NULL;
+free(prev);
+free(curr);
+}

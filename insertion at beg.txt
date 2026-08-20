@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int main() {
+    struct Node* head = NULL; // empty list
+    struct Node* newNode;
+
+    // Create new node
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = 10;       // value to insert
+    newNode->next = head;     // point to old head
+    head = newNode;           // update head
+
+    // Print list
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+
+    return 0;
+}

@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure
+struct Node {
+int data;
+struct Node *next;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+newNode->data = data;
+newNode->next = NULL;
+return newNode;
+}
+
+// Function to append a node at the end
+void append(struct Node** head_ref, int data) {
+struct Node* newNode = createNode(data);
+if (*head_ref == NULL) {
+*head_ref = newNode;
+return;
+}
+struct Node* temp = *head_ref;
+while (temp->next != NULL)
+temp = temp->next;
+temp->next = newNode;
+}
+
+// Function to search an element in the list
+int search(struct Node* head, int key) {
+int position = 1;
+while (head != NULL) {
+if (head->data == key)
+return position;
+head = head->next;
+position++;
+}
+return -1; // Not found
+}
+
+int main() {
+struct Node* head = NULL;
+int n, val, key, pos;
+
+printf("Enter number of nodes: ");
+scanf("%d", &n);
+
+for (int i = 0; i < n; i++) {
+printf("Enter value for node %d: ", i + 1);
+scanf("%d", &val);
+append(&head, val);
+}
+
+printf("Enter element to search: ");
+scanf("%d", &key);
+
+pos = search(head, key);
+if (pos != -1)
+printf("Element found at position %d\n", pos);
+else
+printf("Element not found in the list.\n");
+
+return 0;
+}--

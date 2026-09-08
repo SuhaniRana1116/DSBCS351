@@ -1,0 +1,110 @@
+#include <stdio.h>
+
+// Function to delete from the beginning
+void deleteAtBeginning(int arr[], int *n) {
+    if (*n <= 0) {
+        printf("Array is empty. Cannot delete.\n");
+        return;
+    }
+    for (int i = 0; i < *n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*n)--;
+}
+
+// Function to delete from the end
+void deleteAtEnd(int arr[], int *n) {
+    if (*n <= 0) {
+        printf("Array is empty. Cannot delete.\n");
+        return;
+    }
+    (*n)--;
+}
+
+// Function to delete from a given position (1-based index)
+void deleteAtPosition(int arr[], int *n, int pos) {
+    if (*n <= 0) {
+        printf("Array is empty. Cannot delete.\n");
+        return;
+    }
+    if (pos < 1 || pos > *n) {
+        printf("Invalid position! Must be between 1 and %d.\n", *n);
+        return;
+    }
+    for (int i = pos - 1; i < *n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*n)--;
+}
+
+// Function to display the array
+void displayArray(int arr[], int n) {
+    if (n == 0) {
+        printf("Array is empty.\n");
+        return;
+    }
+    printf("Array elements: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[100], n, choice, pos;
+
+    // Input array size
+    printf("Enter number of elements (max 100): ");
+    if (scanf("%d", &n) != 1 || n < 0 || n > 100) {
+        printf("Invalid size.\n");
+        return 1;
+    }
+
+    // Input array elements
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        if (scanf("%d", &arr[i]) != 1) {
+            printf("Invalid input.\n");
+            return 1;
+        }
+    }
+
+    while (1) {
+        printf("\n--- Deletion Menu ---\n");
+        printf("1. Delete at Beginning\n");
+        printf("2. Delete at End\n");
+        printf("3. Delete at Given Position\n");
+        printf("4. Display Array\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid choice.\n");
+            return 1;
+        }
+
+        switch (choice) {
+            case 1:
+                deleteAtBeginning(arr, &n);
+                break;
+            case 2:
+                deleteAtEnd(arr, &n);
+                break;
+            case 3:
+                printf("Enter position to delete (1-based index): ");
+                if (scanf("%d", &pos) != 1) {
+                    printf("Invalid input.\n");
+                    return 1;
+                }
+                deleteAtPosition(arr, &n, pos);
+                break;
+            case 4:
+                displayArray(arr, n);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice.\n");
+        }
+    }
+}
